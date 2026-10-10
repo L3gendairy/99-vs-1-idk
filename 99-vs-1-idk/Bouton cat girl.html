@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1% vs 99% Button with Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            background-color: #f4f4f9;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 25px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        #tracker {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #555;
+            background: white;
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #tracker p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test Your Luck</h1>
+    <p>Will you hit the rare 1% or the common 99%?</p>
+
+    <button onclick="pressButton()">Press the Button</button>
+    
+    <div id="result"></div>
+
+    <div id="tracker">
+        <p>Total Tries: <span id="totalCount">0</span></p>
+        <p>1% Hits: <span id="onePercentCount" style="color: #d9534f; font-weight: bold;">0</span></p>
+        <p>99% Hits: <span id="ninetyNinePercentCount" style="color: #0275d8; font-weight: bold;">0</span></p>
+    </div>
+
+    <script>
+        // Variables to keep track of the counts
+        let totalTries = 0;
+        let onePercentHits = 0;
+        let ninetyNinePercentHits = 0;
+
+        function pressButton() {
+            // Generate a random number from 1 to 100
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            
+            const resultDiv = document.getElementById("result");
+            const totalCountSpan = document.getElementById("totalCount");
+            const onePercentSpan = document.getElementById("onePercentCount");
+            const ninetyNinePercentSpan = document.getElementById("ninetyNinePercentCount");
+
+            // Increase total tries
+            totalTries++;
+
+            // Check if it's 1% or 99%
+            if (randomNumber === 1) {
+                onePercentHits++;
+                resultDiv.innerHTML = "🎉 Incredible! You hit the <span style='color: #d9534f;'>1%</span>!";
+            } else {
+                ninetyNinePercentHits++;
+                resultDiv.innerHTML = "You landed on the <span style='color: #0275d8;'>99%</span>.";
+            }
+
+            // Update the tracker display on the webpage
+            totalCountSpan.textContent = totalTries;
+            onePercentSpan.textContent = onePercentHits;
+            ninetyNinePercentSpan.textContent = ninetyNinePercentHits;
+        }
+    </script>
+
+</body>
+</html>
